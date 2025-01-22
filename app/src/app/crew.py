@@ -1,6 +1,11 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool, WebsiteSearchTool
+from langchain_openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
 @CrewBase
 class CrewProfessorCasd():
 
@@ -15,6 +20,7 @@ class CrewProfessorCasd():
 				WebsiteSearchTool()
 			],
 			verbose=True,
+			llm="gpt-3.5-turbo-0125",
 			allow_delegation=False
 		)
 	@agent
@@ -22,6 +28,7 @@ class CrewProfessorCasd():
 		return Agent(
 			config=self.agents_config['teacher_cordinator'],
 			verbose=True,
+			llm="gpt-3.5-turbo-0125",
 			allow_delegation=False
 		)	
 	@agent
@@ -29,6 +36,7 @@ class CrewProfessorCasd():
 		return Agent(
 			config=self.agents_config['activity_suggester'],
 			verbose=True,
+			llm="gpt-3.5-turbo-0125",
 			allow_delegation=False
 		)
 	@task

@@ -2,15 +2,12 @@
 import sys
 import warnings
 
-from app.crew import CrewProfessorCasd
+from src.app.crew import CrewProfessorCasd
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
-def run():
-    inputs = {
-        'main topic': 'similarity of triangles'
-    }
-    CrewProfessorCasd().crew().kickoff(inputs=inputs)
+def run(inputs):    
+    return CrewProfessorCasd().crew().kickoff(inputs=inputs, return_all_outputs=True)
 
 
 if __name__ == "__main__":
