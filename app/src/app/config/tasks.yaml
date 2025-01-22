@@ -34,7 +34,7 @@ class_setup:
     You don't need to follow the structure above exactly, but take it as your main model.
   expected_output: >
     The expected output is text that follows the described structure in the same or similar way to the example structure provided
-  agent: Teacher
+  agent: teacher
 
 class_check:
   description: >
@@ -73,7 +73,7 @@ class_check:
   expected_output: >
     The expected output is a file in markdown format that contains the repertoire that
     follows the described structure in the same or similar way to the example structure provided.
-  agent: Teacher_Cordinator
+  agent: teacher_cordinator
 
 class_activities:
   description: >
@@ -96,4 +96,4 @@ class_activities:
     # Activity 2
     Explanation:
     
-  agent: Activity_Suggester
+  agent: activity_suggester

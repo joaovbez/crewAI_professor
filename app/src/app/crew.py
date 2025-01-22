@@ -9,7 +9,7 @@ class CrewProfessorCasd():
 	@agent
 	def teacher(self) -> Agent:
 		return Agent(
-			config=self.agents_config['Teacher'],
+			config=self.agents_config['teacher'],
 			tools=[
 				SerperDevTool(),
 				WebsiteSearchTool()
@@ -20,14 +20,14 @@ class CrewProfessorCasd():
 	@agent
 	def teacher_cordinator(self) -> Agent:
 		return Agent(
-			config=self.agents_config['Teacher_Cordinator'],
+			config=self.agents_config['teacher_cordinator'],
 			verbose=True,
 			allow_delegation=False
 		)	
 	@agent
 	def activity_suggester(self) -> Agent:
 		return Agent(
-			config=self.agents_config['Activity_Suggester'],
+			config=self.agents_config['activity_suggester'],
 			verbose=True,
 			allow_delegation=False
 		)

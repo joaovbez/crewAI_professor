@@ -8,7 +8,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
     inputs = {
-        'main topic': 'AI LLMs'
+        'main topic': 'similarity of triangles'
     }
     CrewProfessorCasd().crew().kickoff(inputs=inputs)
 
