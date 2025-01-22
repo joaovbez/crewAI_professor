@@ -1,17 +1,99 @@
-research_task:
+class_setup:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
-  expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+   Build a repertoire for a basic-level focused class about {main topic} for high school students who are part of the popular course. 
+   To do this, research and use your experience as a teacher to compose the class.  
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Your listing must:
+    - Contain basic subjects that are essential for understanding the subject
+    - Present a chronological order indicated for the class.
+    - Not reaching a more advanced level before covering the basics.
+    - Contain suggestions for exercises that also strengthen the foundations of student learning.
+    - Mention the most frequent pranks in each subject and the mistakes most made by students
+    - Include tips at the end for students to study the subjects at home on their own.
+
+    Example structure for a repertoire class:
+      # Class Subject: {main topic}
+      ## Initial topics (basic but essential):
+      - Topic 1
+      - Topic 2
+      - Topic 3
+      ## Advanced topics (for students who are already familiar with the basics):
+      - Topic 4
+      - Topic 5
+      - Topic 6
+      ## Chronological order of learning topics for better retention and success: example of order
+      ## Essential information about each topic:
+      ### Topic 1:
+      - Summary
+      - Pranks
+      - Exercises
+      - Tips    
+          
+      and so the structure continues...
+
+    You don't need to follow the structure above exactly, but take it as your main model.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    The expected output is text that follows the described structure in the same or similar way to the example structure provided
+  agent: Teacher
+
+class_check:
+  description: >
+    Analyze the Professor's response and check whether the class repertoire on {main topic} created by him is ideal for students in the popular course.
+
+    In a popular course that serves students who are socially vulnerable and therefore do not have access to quality education,
+    the level and way in which classes are taught should guide students to strengthen their basics in all subjects.
+
+    Here is a series of characteristics that the prep course class should present:
+    - Be very detailed in the basics, without skipping steps because you believe students already know
+    - Have a well-constructed chronological order of evolution, without going to the advanced before strengthening the basics of the subject
+    - Contain classic and well-known exercises on each subject
+    - Address the mistakes most made by students and possible pranks in exercises.
+
+    Your answer should not change the structure of the Professor's answer, just make changes on top of it.
+
+    Example structure for a repertoire class:
+      # Class Subject: {main topic}
+      ## Initial topics (basic but essential):
+      - Topic 1
+      - Topic 2
+      - Topic 3
+      ## Advanced topics (for students who are already familiar with the basics):
+      - Topic 4
+      - Topic 5
+      - Topic 6
+      ## Chronological order of learning topics for better retention and success: example of order
+      ## Essential information about each topic:
+      ### Topic 1:
+      - Summary
+      - Pranks
+      - Exercises
+      - Tips    
+          
+      and so the structure continues...
+  expected_output: >
+    The expected output is a file in markdown format that contains the repertoire that
+    follows the described structure in the same or similar way to the example structure provided.
+  agent: Teacher_Cordinator
+
+class_activities:
+  description: >
+    Based on the Coordinating Teacher's final response, the objective is to suggest interactive 
+    activities during class to better capture students' attention and retain learning.
+    
+    Activities can be of any type, as long as they focus on a topic in the class repertoire:
+    - Dynamics between students
+    - Dynamics between teacher and student
+    - Videos
+    - Experiments
+
+    Feel free to suggest other types of activities, but with a focus on the class subject.
+
+  expected_output: >
+    Your answer must be a text that contains a list of activities in the following format:
+
+    # Activity 1
+    Explanation:
+    # Activity 2
+    Explanation:
+    
+  agent: Activity_Suggester

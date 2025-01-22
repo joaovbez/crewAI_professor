@@ -1,62 +1,59 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-
-# If you want to run a snippet of code before or after the crew starts, 
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
-
+from crewai_tools import SerperDevTool, WebsiteSearchTool
 @CrewBase
-class App():
-	"""App crew"""
+class CrewProfessorCasd():
 
-	# Learn more about YAML configuration files here:
-	# Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-	# Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
 	agents_config = 'config/agents.yaml'
 	tasks_config = 'config/tasks.yaml'
-
-	# If you would like to add tools to your agents, you can learn more about it here:
-	# https://docs.crewai.com/concepts/agents#agent-tools
 	@agent
-	def researcher(self) -> Agent:
+	def teacher(self) -> Agent:
 		return Agent(
-			config=self.agents_config['researcher'],
-			verbose=True
+			config=self.agents_config['Teacher'],
+			tools=[
+				SerperDevTool(),
+				WebsiteSearchTool()
+			],
+			verbose=True,
+			allow_delegation=False
 		)
-
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def teacher_cordinator(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
-			verbose=True
+			config=self.agents_config['Teacher_Cordinator'],
+			verbose=True,
+			allow_delegation=False
+		)	
+	@agent
+	def activity_suggester(self) -> Agent:
+		return Agent(
+			config=self.agents_config['Activity_Suggester'],
+			verbose=True,
+			allow_delegation=False
 		)
-
-	# To learn more about structured task outputs, 
-	# task dependencies, and task callbacks, check out the documentation:
-	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
-	def research_task(self) -> Task:
+	def class_setup(self) -> Task:
 		return Task(
-			config=self.tasks_config['research_task'],
+			config=self.tasks_config['class_setup'],
+		)
+	@task
+	def class_check(self) -> Task:
+		return Task(
+			config=self.tasks_config['class_check'],
+			output_file='class.md'
 		)
 
 	@task
-	def reporting_task(self) -> Task:
+	def class_activities(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
+			config=self.tasks_config['class_activities'],			
 		)
-
+	
 	@crew
 	def crew(self) -> Crew:
-		"""Creates the App crew"""
-		# To learn how to add knowledge sources to your crew, check out the documentation:
-		# https://docs.crewai.com/concepts/knowledge#what-is-knowledge
-
 		return Crew(
-			agents=self.agents, # Automatically created by the @agent decorator
-			tasks=self.tasks, # Automatically created by the @task decorator
+			agents=self.agents,
+			tasks=self.tasks,
 			process=Process.sequential,
-			verbose=True,
-			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+			verbose=True,			
 		)
